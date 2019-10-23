@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E9E5669-419C-4F11-9088-4B5EA0E81BA8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>HWM.CheckoutApp</RootNamespace>
-    <AssemblyName>HWM.CheckoutApp</AssemblyName>
+    <ProjectGuid>{7AC66C98-F2C4-443C-BE19-8E1986C44674}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HWM.CheckoutApp.Repository</RootNamespace>
+    <AssemblyName>HWM.CheckoutApp.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,21 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Interfaces\IRepository\IOrderedProductRepository.cs" />
+    <Compile Include="Interfaces\IRepository\IOrderRepository.cs" />
+    <Compile Include="Interfaces\IRepository\IProductRepository.cs" />
+    <Compile Include="Interfaces\IRepository\IRepository.cs" />
+    <Compile Include="Interfaces\IRepository\IStockItemRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="Repository\OrderedProductRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\StockItemRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HWM.CheckoutApp.BusinessObjects\HWM.CheckoutApp.BusinessObjects.csproj">
       <Project>{8a1f3c58-a31b-4c2c-98ea-12aaef27d578}</Project>
       <Name>HWM.CheckoutApp.BusinessObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HWM.CheckoutApp.BusinessService\HWM.CheckoutApp.BusinessService.csproj">
-      <Project>{45585d0f-0cee-46b5-b0ef-d3113953f8b8}</Project>
-      <Name>HWM.CheckoutApp.BusinessService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

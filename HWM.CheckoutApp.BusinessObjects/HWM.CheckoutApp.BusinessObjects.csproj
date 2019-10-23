@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E9E5669-419C-4F11-9088-4B5EA0E81BA8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>HWM.CheckoutApp</RootNamespace>
-    <AssemblyName>HWM.CheckoutApp</AssemblyName>
+    <ProjectGuid>{8A1F3C58-A31B-4C2C-98EA-12AAEF27D578}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HWM.CheckoutApp.BusinessObjects</RootNamespace>
+    <AssemblyName>HWM.CheckoutApp.BusinessObjects</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,22 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
+    <Compile Include="DTO\OrderedProductDTO.cs" />
+    <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\StockItemDTO.cs" />
+    <Compile Include="EnumType\PaymentMethodType.cs" />
+    <Compile Include="EnumType\ProductCategoryType.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IDataTransferObject.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderedProduct.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\StockItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HWM.CheckoutApp.BusinessObjects\HWM.CheckoutApp.BusinessObjects.csproj">
-      <Project>{8a1f3c58-a31b-4c2c-98ea-12aaef27d578}</Project>
-      <Name>HWM.CheckoutApp.BusinessObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HWM.CheckoutApp.BusinessService\HWM.CheckoutApp.BusinessService.csproj">
-      <Project>{45585d0f-0cee-46b5-b0ef-d3113953f8b8}</Project>
-      <Name>HWM.CheckoutApp.BusinessService</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
