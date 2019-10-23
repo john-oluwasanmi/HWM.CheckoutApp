@@ -26,6 +26,6 @@ namespace HWM.CheckoutApp.DTO
         public Nullable<long> UpdatedBy { get; set; }
         public string CreatedFrom { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual ProductDTO Product { get; set; }
     }
 }

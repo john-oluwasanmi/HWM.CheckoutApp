@@ -20,7 +20,7 @@ namespace HWM.CheckoutApp.DTO
         public string CreatedFrom { get; set; }
 
 
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual OrderDTO Order { get; set; }
+        public virtual ProductDTO Product { get; set; }
     }
 }

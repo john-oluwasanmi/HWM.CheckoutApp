@@ -37,7 +37,7 @@ namespace HWM.CheckoutApp.DTO
         public long? UpdatedBy { get; set; }
         public string CreatedFrom { get; set; }
 
-        public virtual List<StockItem> StockItems { get; set; } = new List<StockItem> { };
+        public virtual List<StockItemDTO> StockItems { get; set; } = new List<StockItemDTO> { };
         public virtual ProductCategoryType ProductCategoryType { get; set; }
     }
 }
