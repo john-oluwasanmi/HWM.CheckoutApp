@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,12 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap.cs" />
+    <Compile Include="AppContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HWM.CheckoutApp.BusinessObjects\HWM.CheckoutApp.BusinessObjects.csproj">
@@ -58,6 +62,10 @@
     <ProjectReference Include="..\HWM.CheckoutApp.BusinessService\HWM.CheckoutApp.BusinessService.csproj">
       <Project>{45585d0f-0cee-46b5-b0ef-d3113953f8b8}</Project>
       <Name>HWM.CheckoutApp.BusinessService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWM.CheckoutApp.Repository\HWM.CheckoutApp.Repository.csproj">
+      <Project>{7AC66C98-F2C4-443C-BE19-8E1986C44674}</Project>
+      <Name>HWM.CheckoutApp.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@ using HWM.CheckoutApp.Interfaces.DataTransferObject;
 using System;
 using System.Collections.Generic;
 
-namespace HWM.CheckoutApp.Model
+namespace HWM.CheckoutApp.DTO
 {
     public  class ProductDTO : IDataTransferObject
     {

@@ -3,7 +3,7 @@ using HWM.CheckoutApp.Interfaces.DataTransferObject;
 using System;
 using System.Collections.Generic;
 
-namespace HWM.CheckoutApp.Model
+namespace HWM.CheckoutApp.DTO
 {
     public class OrderDTO : IDataTransferObject
     {
@@ -30,7 +30,7 @@ namespace HWM.CheckoutApp.Model
 
         public virtual PaymentMethodType PaymentMethodType { get; set; }
 
-        public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
+        public virtual ICollection<OrderedProductDTO> OrderedProducts { get; set; }
 
     }
 }

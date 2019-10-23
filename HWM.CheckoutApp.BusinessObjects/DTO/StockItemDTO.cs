@@ -1,7 +1,7 @@
 ﻿using HWM.CheckoutApp.Interfaces.DataTransferObject;
 using System;
 
-namespace HWM.CheckoutApp.Model
+namespace HWM.CheckoutApp.DTO
 {
     public class StockItemDTO : IDataTransferObject
     {

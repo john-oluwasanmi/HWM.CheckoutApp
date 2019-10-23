@@ -1,4 +1,4 @@
-﻿using HWM.CheckoutApp.Model;
+﻿using HWM.CheckoutApp.DTO;
 
 namespace HWM.CheckoutApp.Interfaces.BusinessService
 {

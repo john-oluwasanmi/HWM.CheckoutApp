@@ -1,5 +1,4 @@
 ﻿using HWM.CheckoutApp.Interfaces.DataTransferObject;
-using HWM.CheckoutApp.Interfaces.Entity;
 using System.Collections.Generic;
 
 namespace HWM.CheckoutApp.Interfaces.BusinessService

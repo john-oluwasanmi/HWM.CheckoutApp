@@ -1,8 +1,9 @@
-﻿using HWM.CheckoutApp.BusinessService;
+﻿using HWM.CheckoutApp.DTO;
 using HWM.CheckoutApp.Interfaces.BusinessService;
 using HWM.CheckoutApp.Interfaces.Repository;
+using HWM.CheckoutApp.Model;
 
-namespace HWM.CheckoutApp.Model
+namespace HWM.CheckoutApp.BusinessService
 {
     public class ProductBusinessService : BusinessServiceBase<ProductDTO,Product>
         , IProductBusinessService

@@ -1,9 +1,10 @@
 ﻿using HWM.CheckoutApp.Interfaces.Repository;
-using HWM.CheckoutApp.Repository;
+using HWM.CheckoutApp.Model;
 
-namespace HWM.CheckoutApp.Model
+namespace HWM.CheckoutApp.Repository
 {
-    public class OrderRepository : RepositoryBase<Order>, IOrderRepository
+    public class OrderRepository : RepositoryBase<Order>,
+        IOrderRepository
     {
 
 
