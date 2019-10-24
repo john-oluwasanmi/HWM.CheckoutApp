@@ -10,18 +10,18 @@ namespace HWM.CheckoutApp.Model
         public long ProductID { get; set; }
         public short ProductCategoryTypeID { get; set; }
         public string ProductName { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
 
-        public Nullable<decimal> DiscountedXItem { get; set; }
-        public Nullable<decimal> SpecialPriceForXItem { get; set; }
+        public Nullable<double> DiscountedXItem { get; set; }
+        public Nullable<double> SpecialPriceForXItem { get; set; }
 
         public string ManufactureName { get; set; }
-        public decimal Height { get; set; }
-        public decimal Weigth { get; set; }
+        public double Height { get; set; }
+        public double Weigth { get; set; }
         public short? ReorderStockLevel { get; set; }
         public bool IsFragile { get; set; }
-        public decimal Width { get; set; }
+        public double Width { get; set; }
         public bool IsRecommended { get; set; }
         public string ImageUrl { get; set; }
         public string ImageName { get; set; }

@@ -11,7 +11,7 @@ namespace HWM.CheckoutApp.Model
 
         public short Quantity { get; set; }
 
-        public Nullable<decimal> Discount { get; set; }
+        public Nullable<double> Discount { get; set; }
 
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }

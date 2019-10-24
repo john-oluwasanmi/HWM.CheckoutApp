@@ -11,7 +11,7 @@ namespace HWM.CheckoutApp.DTO
         public long ProductID { get; set; }
         public int Quantity { get; set; }
 
-        public Nullable<decimal> Discount { get; set; }
+        public Nullable<double> Discount { get; set; }
 
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
