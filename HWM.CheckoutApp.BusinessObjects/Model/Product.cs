@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HWM.CheckoutApp.Model
 {
-    public  class Product : IEntity
+    public class Product : IEntity
     {
         public long ID => ProductID;
         public long ProductID { get; set; }
@@ -13,7 +13,7 @@ namespace HWM.CheckoutApp.Model
         public string ProductName { get; set; }
         public decimal Price { get; set; }
 
-        public int IsMultiPriced { get; set; }
+        public bool IsMultiPriced => DiscountedXItem != null && SpecialPriceForXItem != null;
 
         public Nullable<decimal> DiscountedXItem { get; set; }
         public Nullable<decimal> SpecialPriceForXItem { get; set; }
@@ -29,7 +29,7 @@ namespace HWM.CheckoutApp.Model
         public string ImageName { get; set; }
 
 
-        public int QuantityInStore => StockItems.Count;
+       public int QuantityInStore => StockItems.Count;
 
         public DateTime CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }

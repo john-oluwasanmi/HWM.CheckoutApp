@@ -18,16 +18,18 @@ namespace HWM.CheckoutApp
         static void Main(string[] args)
         {
             InitializeApp();
+
+            var products = _productBusinessService.List();
         }
 
         private static void InitializeApp()
         {
             AppContainer.RegisterDependencies();
 
-            _orderedProductBusinessService = AppContainer.Resolve<IOrderedProductBusinessService>();
-            _productBusinessService = AppContainer.Resolve<IProductBusinessService>();
-            _stockItemBusinessService = AppContainer.Resolve<IStockItemBusinessService>();
-            _orderBusinessService = AppContainer.Resolve<IOrderBusinessService>();
+        //    _orderedProductBusinessService = AppContainer.Resolve<IOrderedProductBusinessService>();
+          _productBusinessService = AppContainer.Resolve<IProductBusinessService>();
+          //  _stockItemBusinessService = AppContainer.Resolve<IStockItemBusinessService>();
+         //   _orderBusinessService = AppContainer.Resolve<IOrderBusinessService>();
 
         }
     }

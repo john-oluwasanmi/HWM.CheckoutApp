@@ -91,6 +91,7 @@ namespace HWM.CheckoutApp.BusinessService
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<DTO, T>();
+                cfg.CreateMap<T, DTO>();
             });
 
             return config;
