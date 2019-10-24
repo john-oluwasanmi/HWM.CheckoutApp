@@ -20,8 +20,7 @@ namespace HWM.CheckoutApp
 
             var products = _productBusinessService.List();
 
-            Console.WriteLine("Press any key to start new order and End key to exit.... ");
-            Console.WriteLine();
+            IntroductionMessage();
 
             while (Console.ReadKey().Key != ConsoleKey.End)
             {
@@ -46,10 +45,14 @@ namespace HWM.CheckoutApp
             Console.ReadLine();
         }
 
+        private static void IntroductionMessage()
+        {
+            Console.WriteLine("Press any key to start new order and End key to exit.... ");
+            Console.WriteLine();
+        }
+
         private static OrderDTO CreateOrder()
         {
-           
-
             var order = new OrderDTO
             {
                 OrderDate = DateTime.Now,
@@ -58,7 +61,8 @@ namespace HWM.CheckoutApp
 
             _orderBusinessService.Add(order);
 
-            return order;
+
+            return _orderBusinessService.List().Last(); // it is assumed the last order saved is the current order, ideal it should be fetch from the database by Id
         }
 
         private static void AddToBasket(IOrderedEnumerable<IGrouping<string, ProductDTO>> scannedProductGroup)
@@ -83,8 +87,11 @@ namespace HWM.CheckoutApp
         private static List<ProductDTO> ScanItemsAndCheckForAvailability(List<ProductDTO> products)
         {
             Console.WriteLine("Scan your selected product by entry a letter separated by comma");
+            Console.WriteLine();
 
             var scannedItem = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine();
 
             var orderedProductsScanned = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
 
@@ -104,27 +111,36 @@ namespace HWM.CheckoutApp
                 {
                     var extra = item.Quantity % item.Product.DiscountedXItem;
                     var extraCost = extra * item.Product.Price;
+
                     int discountedSelections = Convert.ToInt32(Math.Floor(item.Quantity / (double)item.Product.DiscountedXItem));
                     var dicountedPrice = discountedSelections * (double)item.Product.SpecialPriceForDiscountedXItem;
-                    totalPrice += dicountedPrice;
 
-                    Console.WriteLine();
+                    totalPrice += dicountedPrice + extraCost ?? 0;
+                    
                     Console.WriteLine($"{item.Quantity} items of {item.Product.ProductName} was scanned at special offer {item.Product.DiscountedXItem} for £{item.Product.SpecialPriceForDiscountedXItem} and one {item.Product.ProductName}  costs  £{item.Product.Price}");
                     Console.WriteLine();
-                    Console.WriteLine($"{discountedSelections * item.Product.DiscountedXItem} items are withing special offer in mutiple of {item.Product.DiscountedXItem} while {extra} are the extras");
+                    Console.WriteLine($"{discountedSelections * item.Product.DiscountedXItem} items are within special offer in mutiple of {item.Product.DiscountedXItem} while {extra} are the extras");
                     Console.WriteLine();
-                    Console.WriteLine($"Discounted Price : £{dicountedPrice}   while £{extraCost} is the cost of extras making total of £{dicountedPrice + extraCost}");
+                    Console.WriteLine($"Discounted Price : £{dicountedPrice}   while £{extraCost} is the cost of extras making total of £{dicountedPrice + extraCost ?? 0}");
                     Console.WriteLine();
+                    Console.WriteLine();
+
                     continue;
                 }
 
-                Console.WriteLine($"{item.Quantity} of {item.Product.ProductName} scanned at £{item.Product.Price} making total of £{item.Product.Price * item.Quantity} with no sepcial offers");
-                Console.WriteLine();
+                var nonDiscountedPrice = item.Product.Price * item.Quantity;
 
-                totalPrice += (item.Product.Price * item.Quantity);
+                Console.WriteLine($"{item.Quantity} of {item.Product.ProductName} scanned at £{item.Product.Price} making total of £{nonDiscountedPrice} with no sepcial offers");
+
+                totalPrice += nonDiscountedPrice;
+                Console.WriteLine();
             }
 
+            Console.WriteLine();
             Console.WriteLine($"Total Price Paid: £{totalPrice} ");
+            Console.WriteLine();
+
+            IntroductionMessage();
         }
 
         private static void InitializeApp()

@@ -1,7 +1,7 @@
 ﻿using HWM.CheckoutApp.Interfaces.Repository;
 using HWM.CheckoutApp.Model;
 using System;
-
+using System.Linq;
 namespace HWM.CheckoutApp.Repository
 {
     public class OrderRepository : RepositoryBase<Order>,
@@ -14,8 +14,8 @@ namespace HWM.CheckoutApp.Repository
 
         public override void Add(Order item)
         {
-            Random random = new Random();
-            item.OrderID = random.Next(1000); // this is to similate orderId, Ideally it  should increament by 1 in database
+            var nextOrderId = base.List()?.LastOrDefault()?.OrderID ?? 0 + 1;
+            item.OrderID = nextOrderId; // this is to similate orderId, Ideally it  should increament by 1 in database
             base.Add(item);
 
         }
