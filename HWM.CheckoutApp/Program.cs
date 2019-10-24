@@ -14,7 +14,7 @@ namespace HWM.CheckoutApp
         static IProductBusinessService _productBusinessService;
         static IStockItemBusinessService _stockItemBusinessService;
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             InitializeApp();
 
@@ -49,7 +49,7 @@ namespace HWM.CheckoutApp
             Console.WriteLine();
         }
 
-        private static OrderDTO CreateOrder()
+        public static OrderDTO CreateOrder()
         {
             var order = new OrderDTO
             {
@@ -63,7 +63,7 @@ namespace HWM.CheckoutApp
             return _orderBusinessService.List().Last(); // it is assumed the last order saved is the current order, ideal it should be fetch from the database by Id
         }
 
-        private static void AddToBasket(IOrderedEnumerable<IGrouping<string, ProductDTO>> scannedProductGroup)
+        public static void AddToBasket(IOrderedEnumerable<IGrouping<string, ProductDTO>> scannedProductGroup)
         {
             var order = CreateOrder();
 
@@ -82,7 +82,7 @@ namespace HWM.CheckoutApp
             }
         }
 
-        private static List<ProductDTO> ScanItemsAndCheckForAvailability(List<ProductDTO> products)
+        public static List<ProductDTO> ScanItemsAndCheckForAvailability(List<ProductDTO> products)
         {
             Console.WriteLine("Scan your selected product by entry a letter separated by comma");
             Console.WriteLine();
@@ -99,7 +99,7 @@ namespace HWM.CheckoutApp
             return availableOrderedProductsInStore;
         }
 
-        private static void CalculateTotalCost(List<OrderedProductDTO> orderedProducts)
+        public static void CalculateTotalCost(List<OrderedProductDTO> orderedProducts)
         {
             double totalPrice = 0;
 
@@ -137,11 +137,9 @@ namespace HWM.CheckoutApp
             Console.WriteLine();
             Console.WriteLine($"Total Price Paid: £{totalPrice} ");
             Console.WriteLine();
-
-            IntroductionMessage();
         }
 
-        private static void InitializeApp()
+        public static void InitializeApp()
         {
             AppContainer.RegisterDependencies();
 
