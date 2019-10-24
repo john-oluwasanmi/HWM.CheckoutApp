@@ -10,22 +10,28 @@ namespace HWM.CheckoutApp.Repository
     {
         public void Add(T item)
         {
+            // call to REST api 
+
             throw new NotImplementedException();
         }
         public virtual T Get(int id)
         {
+            // call to REST api 
             throw new NotImplementedException();
         }
         public virtual List<T> List()
         {
+            // call to REST api 
             throw new NotImplementedException();
         }
         public virtual void Update(T item)
         {
+            // call to REST api 
             throw new NotImplementedException();
         }
         public virtual void Delete(int id)
         {
+            // call to REST api 
             throw new NotImplementedException();
         }
     }

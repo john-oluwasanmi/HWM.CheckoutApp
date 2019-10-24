@@ -16,7 +16,7 @@ namespace HWM.CheckoutApp.BusinessService
         protected readonly IMapper IMapper;
 
         protected T Entity { get; set; } = new T();
-        protected DTO IDataTransferObject { get; set; } = new DTO();
+        protected DTO DataTransferObject { get; set; } = new DTO();
 
         public BusinessServiceBase(IRepository<T> repository)
         {

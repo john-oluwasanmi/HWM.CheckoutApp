@@ -11,6 +11,10 @@ namespace HWM.CheckoutApp.BusinessService
         public OrderBusinessService(IOrderRepository orderRepository)
               : base(orderRepository)
         {
+
+            //override the base class methods to your specfication 
+            //and make a call to the base class methods to perform common CRUD functionalities
+            //generics is used to factor out common CRUD functionalities
         }
     }
 }
