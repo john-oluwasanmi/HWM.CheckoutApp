@@ -9,6 +9,7 @@ namespace HWM.CheckoutApp.DTO
     {
         public long ID => OrderID;
         public int OrderID { get; set; }
+        public int CustomerID { get; set; }
         public byte PaymentMethodTypeID { get; set; }
         public System.DateTime OrderDate { get; set; }
         public double TotalAmountPaid { get; set; }

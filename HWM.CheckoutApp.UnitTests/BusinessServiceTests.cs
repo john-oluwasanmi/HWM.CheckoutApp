@@ -7,9 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Tests
+namespace HWM.CheckoutApp.UnitTests
 {
     [TestClass]
     public class BusinessServiceTests
@@ -23,10 +22,7 @@ namespace Tests
         {
             var mockOrderRepository = new Mock<IOrderRepository>();
 
-            _orders = new List<Order>
-            {
-
-            };
+            _orders = new List<Order> { };
 
             mockOrderRepository.Setup(r => r.Add(It.IsAny<Order>()))
                                 .Callback<Order>(c => _orders.Add(new Order
@@ -34,8 +30,11 @@ namespace Tests
                                     OrderDate = DateTime.Now,
                                 }));
 
-
-
+            mockOrderRepository.Setup(r => r.Get(It.IsAny<int>())).Returns(new Order
+            {
+                OrderDate = DateTime.Now,
+                OrderID = 1
+            });
 
             mockOrderRepository.Setup(r => r.List()).Returns(_orders);
 
@@ -106,6 +105,13 @@ namespace Tests
         public void WhenGetOrderWithNoIdThen_ThrowExecption()
         {
             _orderBusinessService.Get(0);
+        }
+
+        [TestMethod]
+        public void WhenGetOrderWithIdThen_ReturnOrder()
+        {
+            var order = _orderBusinessService.Get(1);
+            Assert.IsTrue(order.ID == 1);
         }
     }
 }

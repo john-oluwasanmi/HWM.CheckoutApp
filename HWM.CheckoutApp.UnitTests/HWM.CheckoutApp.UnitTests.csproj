@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessServiceTests.cs" />
+    <Compile Include="ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,10 @@
     <ProjectReference Include="..\HWM.CheckoutApp.Repository\HWM.CheckoutApp.Repository.csproj">
       <Project>{7ac66c98-f2c4-443c-be19-8e1986c44674}</Project>
       <Name>HWM.CheckoutApp.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HWM.CheckoutApp\HWM.CheckoutApp.csproj">
+      <Project>{6e9e5669-419c-4f11-9088-4b5ea0e81ba8}</Project>
+      <Name>HWM.CheckoutApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

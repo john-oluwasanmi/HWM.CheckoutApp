@@ -12,13 +12,12 @@ namespace HWM.CheckoutApp
         static IOrderBusinessService _orderBusinessService;
         static IOrderedProductBusinessService _orderedProductBusinessService;
         static IProductBusinessService _productBusinessService;
-        static IStockItemBusinessService _stockItemBusinessService;
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             InitializeApp();
 
-            var products = _productBusinessService.List();
+            var availableProducts = _productBusinessService.List();
 
             IntroductionMessage();
 
@@ -27,14 +26,26 @@ namespace HWM.CheckoutApp
                 Console.WriteLine();
                 Console.WriteLine();
 
-                List<ProductDTO> availableScannedProductsInStore = ScanItemsAndCheckForAvailability(products);
+                Console.WriteLine("Scan your selected product by entry a letter separated by comma");
+                Console.WriteLine();
+
+                var scannedItem = Console.ReadLine();
+
+                Console.WriteLine();
+                Console.WriteLine();
+
+                IEnumerable<string> orderedProductsScanned = ScanProduct(scannedItem);
+
+                List<ProductDTO> availableScannedProductsInStore = CheckForAvailability(availableProducts, orderedProductsScanned);
 
                 var scannedProductGroup = from it in availableScannedProductsInStore
                                           group it by it.ProductName into newGroup
                                           orderby newGroup.Key
                                           select newGroup;
 
-                AddToBasket(scannedProductGroup);
+                var order = CreateOrder();
+
+                AddToBasket(scannedProductGroup, order);
 
                 var orderedProducts = _orderedProductBusinessService.List();
 
@@ -45,13 +56,7 @@ namespace HWM.CheckoutApp
             Console.ReadLine();
         }
 
-        private static void IntroductionMessage()
-        {
-            Console.WriteLine("Press any key to start new order and End key to exit.... ");
-            Console.WriteLine();
-        }
-
-        private static OrderDTO CreateOrder()
+        public static OrderDTO CreateOrder()
         {
             var order = new OrderDTO
             {
@@ -61,14 +66,11 @@ namespace HWM.CheckoutApp
 
             _orderBusinessService.Add(order);
 
-
             return _orderBusinessService.List().Last(); // it is assumed the last order saved is the current order, ideal it should be fetch from the database by Id
         }
 
-        private static void AddToBasket(IOrderedEnumerable<IGrouping<string, ProductDTO>> scannedProductGroup)
+        public static void AddToBasket(IOrderedEnumerable<IGrouping<string, ProductDTO>> scannedProductGroup, OrderDTO order)
         {
-            var order = CreateOrder();
-
             foreach (var group in scannedProductGroup)
             {
                 var quantity = group.Count();
@@ -84,24 +86,21 @@ namespace HWM.CheckoutApp
             }
         }
 
-        private static List<ProductDTO> ScanItemsAndCheckForAvailability(List<ProductDTO> products)
+        public static List<ProductDTO> CheckForAvailability(List<ProductDTO> products, IEnumerable<string> orderedProductsScanned)
         {
-            Console.WriteLine("Scan your selected product by entry a letter separated by comma");
-            Console.WriteLine();
-
-            var scannedItem = Console.ReadLine();
-            Console.WriteLine();
-            Console.WriteLine();
-
-            var orderedProductsScanned = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
-
             var availableOrderedProductsInStore = (from it in orderedProductsScanned
                                                    join p in products on it equals p.ProductName
                                                    select p).ToList();
             return availableOrderedProductsInStore;
         }
 
-        private static void CalculateTotalCost(List<OrderedProductDTO> orderedProducts)
+        public static IEnumerable<string> ScanProduct(string scannedItem)
+        {
+            var orderedProductsScanned = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
+            return orderedProductsScanned;
+        }
+
+        public static void CalculateTotalCost(List<OrderedProductDTO> orderedProducts)
         {
             double totalPrice = 0;
 
@@ -116,7 +115,7 @@ namespace HWM.CheckoutApp
                     var dicountedPrice = discountedSelections * (double)item.Product.SpecialPriceForDiscountedXItem;
 
                     totalPrice += dicountedPrice + extraCost ?? 0;
-                    
+
                     Console.WriteLine($"{item.Quantity} items of {item.Product.ProductName} was scanned at special offer {item.Product.DiscountedXItem} for £{item.Product.SpecialPriceForDiscountedXItem} and one {item.Product.ProductName}  costs  £{item.Product.Price}");
                     Console.WriteLine();
                     Console.WriteLine($"{discountedSelections * item.Product.DiscountedXItem} items are within special offer in mutiple of {item.Product.DiscountedXItem} while {extra} are the extras");
@@ -149,8 +148,13 @@ namespace HWM.CheckoutApp
 
             _orderedProductBusinessService = AppContainer.Resolve<IOrderedProductBusinessService>();
             _productBusinessService = AppContainer.Resolve<IProductBusinessService>();
-            _stockItemBusinessService = AppContainer.Resolve<IStockItemBusinessService>();
             _orderBusinessService = AppContainer.Resolve<IOrderBusinessService>();
+        }
+
+        private static void IntroductionMessage()
+        {
+            Console.WriteLine("Press any key to start new order and End key to exit.... ");
+            Console.WriteLine();
         }
     }
 }
