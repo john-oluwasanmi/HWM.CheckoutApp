@@ -57,7 +57,26 @@ namespace HWM.CheckoutApp
                     ProductID = group.First().ProductID,
                     Quantity = quantity
                 });
+            }
 
+            var orderedProducts = _orderedProductBusinessService.List();
+
+            double totalPrice = 0;
+
+            foreach (var item in orderedProducts)
+            {
+                if (item.Product.IsMultiPriced)
+                {
+                    var extra = item.Quantity % item.Product.DiscountedXItem;
+                    var extraCost = extra * item.Product.Price;
+                    int discountedSelections = Convert.ToInt32(Math.Floor(item.Quantity / (double)item.Product.DiscountedXItem));
+                    var dicountedPrice = discountedSelections * (double)item.Product.SpecialPriceForXItem;
+                    totalPrice += dicountedPrice;
+
+                    continue;
+                }
+
+                totalPrice += item.Product.Price;
             }
         }
 

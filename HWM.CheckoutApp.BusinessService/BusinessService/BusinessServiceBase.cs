@@ -98,6 +98,11 @@ namespace HWM.CheckoutApp.BusinessService
                 cfg.CreateMap<ProductDTO, Product>();
                 cfg.CreateMap<OrderedProductDTO, OrderedProduct>();
                 cfg.CreateMap<StockItemDTO, StockItem>();
+
+                cfg.CreateMap<Order, OrderDTO>();
+                cfg.CreateMap<Product, ProductDTO>();
+                cfg.CreateMap<OrderedProduct, OrderedProductDTO>();
+                cfg.CreateMap<StockItem, StockItemDTO>();
             });
 
             return config;
