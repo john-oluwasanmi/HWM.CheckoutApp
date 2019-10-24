@@ -55,12 +55,12 @@ namespace HWM.CheckoutApp.UnitTests
         }
         public void ScanItemsTest()
         {
-            //Todo- test all the public methods in Program class if there is more time
+            //Todo- unit test all the public methods in Program class if there is more time
         }
 
         public void CheckForAvailabilityTest()
         {
-            //Todo- test all the public methods in Program class if there is more time
+            //Todo- unit test all the public methods in Program class if there is more time
         }
     }
 }
