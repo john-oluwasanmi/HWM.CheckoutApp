@@ -22,24 +22,22 @@ namespace HWM.CheckoutApp
 
             IntroductionMessage();
 
-            while (Console.ReadKey().Key != ConsoleKey.End)
-            {
-                Console.WriteLine();
-                Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
 
-                List<ProductDTO> availableScannedProductsInStore = ScanItemsAndCheckForAvailability(products);
+            List<ProductDTO> availableScannedProductsInStore = ScanItemsAndCheckForAvailability(products);
 
-                var scannedProductGroup = from it in availableScannedProductsInStore
-                                          group it by it.ProductName into newGroup
-                                          orderby newGroup.Key
-                                          select newGroup;
+            var scannedProductGroup = from it in availableScannedProductsInStore
+                                      group it by it.ProductName into newGroup
+                                      orderby newGroup.Key
+                                      select newGroup;
 
-                AddToBasket(scannedProductGroup);
+            AddToBasket(scannedProductGroup);
 
-                var orderedProducts = _orderedProductBusinessService.List();
+            var orderedProducts = _orderedProductBusinessService.List();
 
-                CalculateTotalCost(orderedProducts);
-            }
+            CalculateTotalCost(orderedProducts);
+
 
             Console.WriteLine("Exiting.... ");
             Console.ReadLine();
