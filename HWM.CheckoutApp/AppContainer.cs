@@ -36,10 +36,19 @@ namespace HWM.CheckoutApp
             builder.RegisterType<StockItemBusinessService>().As<IStockItemBusinessService>().SingleInstance();
 
             //repository
-            builder.RegisterType<IOrderBusinessService>().As<IOrderBusinessService>().SingleInstance();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().SingleInstance();
             builder.RegisterType<OrderedProductRepository>().As<IOrderedProductRepository>().SingleInstance();
-            builder.RegisterType<ProductBusinessService>().As<IProductBusinessService>().SingleInstance();
-            builder.RegisterType<StockItemBusinessService>().As<IStockItemBusinessService>().SingleInstance();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
+            builder.RegisterType<StockItemRepository>().As<IStockItemRepository>().SingleInstance();
+
+            builder.RegisterGeneric(typeof(BusinessServiceBase<,>))
+               .As(typeof(IBusinessService<>))
+               .InstancePerDependency();
+
+            builder.RegisterGeneric(typeof(RepositoryBase<>))
+              .As(typeof(IRepository<>))
+              .InstancePerDependency();
+
 
             _container = builder.Build();
         }
