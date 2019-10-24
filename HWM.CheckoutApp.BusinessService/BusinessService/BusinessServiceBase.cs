@@ -27,7 +27,6 @@ namespace HWM.CheckoutApp.BusinessService
         public void Add(DTO item)
         {
             CheckIfNull(item);
-            ValidateId(item.ID);
 
             if (item.ID > 0)
             {

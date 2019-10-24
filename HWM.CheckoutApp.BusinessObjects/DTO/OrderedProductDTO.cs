@@ -9,7 +9,7 @@ namespace HWM.CheckoutApp.DTO
         public long OrderProductID { get; set; }
         public long OrderID { get; set; }
         public long ProductID { get; set; }
-        public short Quantity { get; set; }
+        public int Quantity { get; set; }
 
         public Nullable<decimal> Discount { get; set; }
 

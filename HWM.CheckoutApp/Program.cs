@@ -22,12 +22,20 @@ namespace HWM.CheckoutApp
 
             var products = _productBusinessService.List();
 
+            Console.WriteLine("Scan your selected product by entry a letter separated by comma");
             var scannedItem = Console.ReadLine();
             var orderedProducts = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
 
-            var availableProducts = (from it in orderedProducts
-                                     join p in products on it equals p.ProductName
-                                     select p).ToList();
+            var availableOrderedProductsInStore = (from it in orderedProducts
+                                            join p in products on it equals p.ProductName
+                                            select p).ToList();
+
+            var orderedProductGroup = from it in availableOrderedProductsInStore
+                                      group it by it.ProductName into newGroup
+                                      orderby newGroup.Key
+                                      select newGroup;
+
+          
 
             var order = new OrderDTO
             {
@@ -35,16 +43,18 @@ namespace HWM.CheckoutApp
                 OrderID = 1
             };
 
-            foreach (var item in availableProducts)
+            foreach (var group in orderedProductGroup)
             {
+                var quantity = group.Count();
+
                 _orderedProductBusinessService.Add(new OrderedProductDTO
                 {
-                    Product = item,
-                    Order = order
+                    Product = group.FirstOrDefault(),
+                    Order = order,
+                    Quantity = quantity
                 });
+
             }
-
-
         }
 
         private static void InitializeApp()
