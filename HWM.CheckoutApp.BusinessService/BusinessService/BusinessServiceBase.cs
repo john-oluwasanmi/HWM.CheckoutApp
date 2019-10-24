@@ -32,7 +32,8 @@ namespace HWM.CheckoutApp.BusinessService
 
             if (item.ID > 0)
             {
-                throw new Exception("Invalid Id");
+                var typeName = Entity.GetType().Name;
+                throw new Exception($"Invalid {typeName}Id");
             }
 
             var result = IMapper.Map<DTO, T>(item);
@@ -75,7 +76,8 @@ namespace HWM.CheckoutApp.BusinessService
         {
             if (item == null)
             {
-                throw new Exception($"Invalid {item.GetType().Name} item");
+                var typeName = Entity.GetType().Name;
+                throw new NullReferenceException($"Invalid {typeName} item");
             }
         }
 
@@ -83,7 +85,7 @@ namespace HWM.CheckoutApp.BusinessService
         {
             if (id < 1)
             {
-                throw new Exception($"Invalid {Entity.GetType().Name} Id");
+                throw new Exception($"Invalid {Entity.GetType().Name}Id");
             }
         }
 

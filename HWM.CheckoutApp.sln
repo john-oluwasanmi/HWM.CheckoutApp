@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWM.CheckoutApp.BusinessSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWM.CheckoutApp.BusinessObjects", "HWM.CheckoutApp.BusinessObjects\HWM.CheckoutApp.BusinessObjects.csproj", "{8A1F3C58-A31B-4C2C-98EA-12AAEF27D578}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWM.CheckoutApp.UnitTests", "HWM.CheckoutApp.UnitTests\HWM.CheckoutApp.UnitTests.csproj", "{A2165282-F1F6-48B3-8E50-DD2480D7FFC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8A1F3C58-A31B-4C2C-98EA-12AAEF27D578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A1F3C58-A31B-4C2C-98EA-12AAEF27D578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A1F3C58-A31B-4C2C-98EA-12AAEF27D578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2165282-F1F6-48B3-8E50-DD2480D7FFC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2165282-F1F6-48B3-8E50-DD2480D7FFC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2165282-F1F6-48B3-8E50-DD2480D7FFC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2165282-F1F6-48B3-8E50-DD2480D7FFC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
