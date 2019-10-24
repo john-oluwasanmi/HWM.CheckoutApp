@@ -2,6 +2,7 @@
 {
     public enum PaymentMethodType
     {
+        Unknown,
         Cash,
         CardPayment
     }

@@ -2,9 +2,11 @@
 {
     public enum ProductCategoryType
     {
+        Unknown,
         Clothing,
         Food,
-        Camera
+        Camera,
+        Car
 
     }
 }

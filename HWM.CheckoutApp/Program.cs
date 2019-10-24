@@ -1,5 +1,6 @@
 ﻿using HWM.CheckoutApp.BusinessService;
 using HWM.CheckoutApp.DTO;
+using HWM.CheckoutApp.EnumType;
 using HWM.CheckoutApp.Interfaces.BusinessService;
 using System;
 using System.Collections.Generic;
@@ -24,23 +25,24 @@ namespace HWM.CheckoutApp
 
             Console.WriteLine("Scan your selected product by entry a letter separated by comma");
             var scannedItem = Console.ReadLine();
-            var orderedProducts = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
+            var orderedProductsScanned = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
 
-            var availableOrderedProductsInStore = (from it in orderedProducts
-                                            join p in products on it equals p.ProductName
-                                            select p).ToList();
+            var availableOrderedProductsInStore = (from it in orderedProductsScanned
+                                                   join p in products on it equals p.ProductName
+                                                   select p).ToList();
 
             var orderedProductGroup = from it in availableOrderedProductsInStore
                                       group it by it.ProductName into newGroup
                                       orderby newGroup.Key
                                       select newGroup;
 
-          
+
 
             var order = new OrderDTO
             {
                 OrderDate = DateTime.Now,
-                OrderID = 1
+                OrderID = 1,
+                PaymentMethodType = PaymentMethodType.Cash
             };
 
             foreach (var group in orderedProductGroup)
@@ -51,6 +53,8 @@ namespace HWM.CheckoutApp
                 {
                     Product = group.FirstOrDefault(),
                     Order = order,
+                    OrderID = order.OrderID,
+                    ProductID = group.First().ProductID,
                     Quantity = quantity
                 });
 

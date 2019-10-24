@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using HWM.CheckoutApp.DTO;
 using HWM.CheckoutApp.Interfaces.BusinessService;
 using HWM.CheckoutApp.Interfaces.DataTransferObject;
 using HWM.CheckoutApp.Interfaces.Entity;
 using HWM.CheckoutApp.Interfaces.Repository;
+using HWM.CheckoutApp.Model;
 using System;
 using System.Collections.Generic;
 
@@ -91,6 +93,11 @@ namespace HWM.CheckoutApp.BusinessService
             {
                 cfg.CreateMap<DTO, T>();
                 cfg.CreateMap<T, DTO>();
+
+                cfg.CreateMap<OrderDTO, Order>();
+                cfg.CreateMap<ProductDTO, Product>();
+                cfg.CreateMap<OrderedProductDTO, OrderedProduct>();
+                cfg.CreateMap<StockItemDTO, StockItem>();
             });
 
             return config;
