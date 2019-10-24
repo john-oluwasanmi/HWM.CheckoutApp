@@ -5,7 +5,7 @@ namespace HWM.CheckoutApp.Model
 {
     public class StockItem : IEntity
     {
-        public long ID => StockItemID;
+        
         public long StockItemID { get; set; }
         public long ProductID { get; set; }
         public int SupplierID { get; set; }

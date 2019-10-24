@@ -8,12 +8,13 @@ namespace HWM.CheckoutApp.DTO
     public  class ProductDTO : IDataTransferObject
     {
         public long ID => ProductID;
+
         public long ProductID { get; set; }
         public short ProductCategoryTypeID { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
 
-        public int IsMultiPriced { get; set; }
+        public bool IsMultiPriced => DiscountedXItem != null && SpecialPriceForXItem != null;
 
         public Nullable<decimal> DiscountedXItem { get; set; }
         public Nullable<decimal> SpecialPriceForXItem { get; set; }
@@ -27,7 +28,6 @@ namespace HWM.CheckoutApp.DTO
         public bool IsRecommended { get; set; }
         public string ImageUrl { get; set; }
         public string ImageName { get; set; }
-
 
         public int QuantityInStore => StockItems.Count;
 
