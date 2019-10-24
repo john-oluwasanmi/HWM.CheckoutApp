@@ -14,7 +14,7 @@ namespace HWM.CheckoutApp.Model
 
 
         public Nullable<double> DiscountedXItem { get; set; }
-        public Nullable<double> SpecialPriceForXItem { get; set; }
+        public Nullable<double> SpecialPriceForDiscountedXItem { get; set; }
 
         public string ManufactureName { get; set; }
         public double Height { get; set; }

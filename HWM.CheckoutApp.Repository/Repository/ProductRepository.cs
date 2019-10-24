@@ -22,8 +22,8 @@ namespace HWM.CheckoutApp.Repository
                new Product
                {
                    ProductName="A",
-                   Price=0.50m,
-                   SpecialPriceForXItem =1.30m,
+                   Price=0.50d,
+                   SpecialPriceForDiscountedXItem =1.30d,
                    DiscountedXItem =3,
                    ProductID =1,
                    ProductCategoryType = ProductCategoryType.Camera
@@ -32,8 +32,8 @@ namespace HWM.CheckoutApp.Repository
                new Product
                {
                    ProductName="B",
-                   Price=0.30m,
-                   SpecialPriceForXItem =0.45m,
+                   Price=0.30d,
+                   SpecialPriceForDiscountedXItem =0.45d,
                    DiscountedXItem =2,
                    ProductID =2,
                    ProductCategoryType = ProductCategoryType.Clothing
@@ -43,7 +43,7 @@ namespace HWM.CheckoutApp.Repository
                new Product
                {
                    ProductName="C",
-                   Price=0.70m,
+                   Price=0.70d,
                    ProductID =3,
                     ProductCategoryType = ProductCategoryType.Food
                },
@@ -51,7 +51,7 @@ namespace HWM.CheckoutApp.Repository
                new Product
                {
                    ProductName="D",
-                   Price=0.20m,
+                   Price=0.20d,
                    ProductID =4,
                      ProductCategoryType = ProductCategoryType.Car
                }

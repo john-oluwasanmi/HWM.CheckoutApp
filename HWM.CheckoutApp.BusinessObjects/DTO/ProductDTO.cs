@@ -14,10 +14,10 @@ namespace HWM.CheckoutApp.DTO
         public string ProductName { get; set; }
         public double Price { get; set; }
 
-        public bool IsMultiPriced => DiscountedXItem != null && SpecialPriceForXItem != null;
+        public bool IsMultiPriced => DiscountedXItem != null && SpecialPriceForDiscountedXItem != null;
 
         public Nullable<double> DiscountedXItem { get; set; }
-        public Nullable<double> SpecialPriceForXItem { get; set; }
+        public Nullable<double> SpecialPriceForDiscountedXItem { get; set; }
 
         public string ManufactureName { get; set; }
         public double Height { get; set; }

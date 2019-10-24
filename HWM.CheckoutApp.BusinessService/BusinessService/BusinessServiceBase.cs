@@ -26,7 +26,7 @@ namespace HWM.CheckoutApp.BusinessService
             IMapper = ConfigureMapper().CreateMapper();
         }
 
-        public void Add(DTO item)
+        public virtual void Add(DTO item)
         {
             CheckIfNull(item);
 

@@ -1,16 +1,13 @@
-﻿using HWM.CheckoutApp.BusinessService;
-using HWM.CheckoutApp.DTO;
+﻿using HWM.CheckoutApp.DTO;
 using HWM.CheckoutApp.EnumType;
 using HWM.CheckoutApp.Interfaces.BusinessService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HWM.CheckoutApp
 {
-    class Program
+    public class Program
     {
         static IOrderBusinessService _orderBusinessService;
         static IOrderedProductBusinessService _orderedProductBusinessService;
@@ -23,29 +20,52 @@ namespace HWM.CheckoutApp
 
             var products = _productBusinessService.List();
 
-            Console.WriteLine("Scan your selected product by entry a letter separated by comma");
-            var scannedItem = Console.ReadLine();
-            var orderedProductsScanned = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
+            Console.WriteLine("Press any key to start new order and End key to exit.... ");
+            Console.WriteLine();
 
-            var availableOrderedProductsInStore = (from it in orderedProductsScanned
-                                                   join p in products on it equals p.ProductName
-                                                   select p).ToList();
+            while (Console.ReadKey().Key != ConsoleKey.End)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
 
-            var orderedProductGroup = from it in availableOrderedProductsInStore
-                                      group it by it.ProductName into newGroup
-                                      orderby newGroup.Key
-                                      select newGroup;
+                List<ProductDTO> availableScannedProductsInStore = ScanItemsAndCheckForAvailability(products);
 
+                var scannedProductGroup = from it in availableScannedProductsInStore
+                                          group it by it.ProductName into newGroup
+                                          orderby newGroup.Key
+                                          select newGroup;
 
+                AddToBasket(scannedProductGroup);
+
+                var orderedProducts = _orderedProductBusinessService.List();
+
+                CalculateTotalCost(orderedProducts);
+            }
+
+            Console.WriteLine("Exiting.... ");
+            Console.ReadLine();
+        }
+
+        private static OrderDTO CreateOrder()
+        {
+           
 
             var order = new OrderDTO
             {
                 OrderDate = DateTime.Now,
-                OrderID = 1,
                 PaymentMethodType = PaymentMethodType.Cash
             };
 
-            foreach (var group in orderedProductGroup)
+            _orderBusinessService.Add(order);
+
+            return order;
+        }
+
+        private static void AddToBasket(IOrderedEnumerable<IGrouping<string, ProductDTO>> scannedProductGroup)
+        {
+            var order = CreateOrder();
+
+            foreach (var group in scannedProductGroup)
             {
                 var quantity = group.Count();
 
@@ -58,9 +78,24 @@ namespace HWM.CheckoutApp
                     Quantity = quantity
                 });
             }
+        }
 
-            var orderedProducts = _orderedProductBusinessService.List();
+        private static List<ProductDTO> ScanItemsAndCheckForAvailability(List<ProductDTO> products)
+        {
+            Console.WriteLine("Scan your selected product by entry a letter separated by comma");
 
+            var scannedItem = Console.ReadLine();
+
+            var orderedProductsScanned = scannedItem.Split(',').Select(e => e.TrimEnd().TrimStart().ToUpperInvariant());
+
+            var availableOrderedProductsInStore = (from it in orderedProductsScanned
+                                                   join p in products on it equals p.ProductName
+                                                   select p).ToList();
+            return availableOrderedProductsInStore;
+        }
+
+        private static void CalculateTotalCost(List<OrderedProductDTO> orderedProducts)
+        {
             double totalPrice = 0;
 
             foreach (var item in orderedProducts)
@@ -70,14 +105,26 @@ namespace HWM.CheckoutApp
                     var extra = item.Quantity % item.Product.DiscountedXItem;
                     var extraCost = extra * item.Product.Price;
                     int discountedSelections = Convert.ToInt32(Math.Floor(item.Quantity / (double)item.Product.DiscountedXItem));
-                    var dicountedPrice = discountedSelections * (double)item.Product.SpecialPriceForXItem;
+                    var dicountedPrice = discountedSelections * (double)item.Product.SpecialPriceForDiscountedXItem;
                     totalPrice += dicountedPrice;
 
+                    Console.WriteLine();
+                    Console.WriteLine($"{item.Quantity} items of {item.Product.ProductName} was scanned at special offer {item.Product.DiscountedXItem} for £{item.Product.SpecialPriceForDiscountedXItem} and one {item.Product.ProductName}  costs  £{item.Product.Price}");
+                    Console.WriteLine();
+                    Console.WriteLine($"{discountedSelections * item.Product.DiscountedXItem} items are withing special offer in mutiple of {item.Product.DiscountedXItem} while {extra} are the extras");
+                    Console.WriteLine();
+                    Console.WriteLine($"Discounted Price : £{dicountedPrice}   while £{extraCost} is the cost of extras making total of £{dicountedPrice + extraCost}");
+                    Console.WriteLine();
                     continue;
                 }
 
-                totalPrice += item.Product.Price;
+                Console.WriteLine($"{item.Quantity} of {item.Product.ProductName} scanned at £{item.Product.Price} making total of £{item.Product.Price * item.Quantity} with no sepcial offers");
+                Console.WriteLine();
+
+                totalPrice += (item.Product.Price * item.Quantity);
             }
+
+            Console.WriteLine($"Total Price Paid: £{totalPrice} ");
         }
 
         private static void InitializeApp()
@@ -88,7 +135,6 @@ namespace HWM.CheckoutApp
             _productBusinessService = AppContainer.Resolve<IProductBusinessService>();
             _stockItemBusinessService = AppContainer.Resolve<IStockItemBusinessService>();
             _orderBusinessService = AppContainer.Resolve<IOrderBusinessService>();
-
         }
     }
 }

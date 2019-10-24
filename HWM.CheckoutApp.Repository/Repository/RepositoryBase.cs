@@ -16,7 +16,7 @@ namespace HWM.CheckoutApp.Repository
         {
             DatabaseEntitySimulation = new List<T>();
         }
-        public void Add(T item)
+        public virtual void Add(T item)
         {
             // Ideally a call to REST api 
             //but using memory as data store
@@ -38,7 +38,7 @@ namespace HWM.CheckoutApp.Repository
         public virtual void Update(T item)
         {
             // call to REST api 
-        
+
             throw new NotImplementedException();
         }
         public virtual void Delete(int id)
